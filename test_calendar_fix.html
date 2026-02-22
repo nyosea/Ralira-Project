@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Calendar Fix</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .btn-primary { background: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
+        .calendar-section { border: 1px solid #ccc; padding: 20px; margin-top: 20px; }
+        .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; }
+        .calendar-day { padding: 10px; text-align: center; border: 1px solid #ddd; cursor: pointer; }
+        .calendar-day:hover { background: #f0f0f0; }
+        .calendar-day.selected { background: #007bff; color: white; }
+    </style>
+</head>
+<body>
+    <h1>Test Calendar Fix</h1>
+    
+    <button type="button" id="btnSelectDates" class="btn-primary">
+        <i class="fas fa-calendar"></i> Pilih Tanggal
+    </button>
+    
+    <div class="calendar-section" id="calendarSection" style="display: none;">
+        <h3>Kalender Test</h3>
+        <div class="calendar-grid" id="calendarGrid">
+            <!-- Calendar will be populated by JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        // Test the fix
+        const btnSelectDates = document.getElementById('btnSelectDates');
+        const calendarSection = document.getElementById('calendarSection');
+        const calendarGrid = document.getElementById('calendarGrid');
+        
+        // Populate simple calendar for testing
+        const dayNames = ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'];
+        dayNames.forEach(day => {
+            const dayElement = document.createElement('div');
+            dayElement.className = 'calendar-day-header';
+            dayElement.textContent = day;
+            dayElement.style.fontWeight = 'bold';
+            calendarGrid.appendChild(dayElement);
+        });
+        
+        for (let day = 1; day <= 31; day++) {
+            const dayElement = document.createElement('div');
+            dayElement.className = 'calendar-day';
+            dayElement.textContent = day;
+            dayElement.addEventListener('click', function() {
+                this.classList.toggle('selected');
+            });
+            calendarGrid.appendChild(dayElement);
+        }
+        
+        // Add event listener (this is the fix)
+        btnSelectDates.addEventListener('click', function() {
+            console.log('Tombol Pilih Tanggal diklik!');
+            calendarSection.style.display = 'block';
+            calendarSection.scrollIntoView({behavior: 'smooth', block: 'start'});
+        });
+        
+        console.log('Test calendar fix loaded. Klik tombol "Pilih Tanggal" untuk menampilkan kalender.');
+    </script>
+</body>
+</html>

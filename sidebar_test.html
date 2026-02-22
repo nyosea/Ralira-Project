@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sidebar Test - Admin</title>
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <link rel="stylesheet" href="assets/css/admin.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f5f7fa;
+        }
+        .test-container {
+            margin-left: 260px;
+            padding: 20px;
+            transition: margin-left 0.3s ease;
+        }
+        .sidebar.collapsed ~ .test-container {
+            margin-left: 70px;
+        }
+        .status {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .status.success {
+            border-left: 4px solid #28a745;
+        }
+        .status.info {
+            border-left: 4px solid #007bff;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <!-- Admin Sidebar Component -->
+    <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+    <aside class="sidebar" id="adminSidebar">
+        <div class="sidebar-header" style="display: flex; align-items: center;">
+            <button class="sidebar-logo-toggle" onclick="toggleSidebarDesktop('adminSidebar')" title="Collapse/Expand">
+                <img src="assets/img/logo.png" alt="Admin Rali Ra" style="width: 50px;">
+            </button>
+            <h4 style="color: var(--color-text); margin-left: 15px;">Panel Admin</h4>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="#" onclick="toggleSidebar()"><i class="fas fa-chart-line"></i> <span>Dashboard</span></a></li>
+            <li><a href="#" onclick="toggleSidebar()"><i class="fas fa-users"></i> <span>Data Pendaftaran Klien</span></a></li>
+            <li><a href="#" onclick="toggleSidebar()"><i class="fas fa-user-nurse"></i> <span>Manajemen Psikolog</span></a></li>
+            <li><a href="#" onclick="toggleSidebar()"><i class="fas fa-calendar-alt"></i> <span>Jadwal Konsultasi</span></a></li>
+        </ul>
+    </aside>
+
+    <!-- Test Content -->
+    <div class="test-container">
+        <div class="status success">
+            <h2>✅ JavaScript Error Fixed!</h2>
+            <p><strong>toggleSidebar is not defined</strong> error has been resolved.</p>
+        </div>
+
+        <div class="status info">
+            <h2>🧪 Test Sidebar Functions:</h2>
+            <button onclick="toggleSidebar()">📱 Toggle Mobile Sidebar</button>
+            <button onclick="toggleSidebarDesktop('adminSidebar')">🖥️ Toggle Desktop Collapse</button>
+            <button onclick="testPerformance()">⚡ Test Performance</button>
+        </div>
+
+        <div class="status info">
+            <h2>📊 Performance Status:</h2>
+            <p><strong>Transition Duration:</strong> 0.3s (as per your changes)</p>
+            <p><strong>Hardware Acceleration:</strong> Removed (as per your changes)</p>
+            <p><strong>Debounce:</strong> Removed (as per your changes)</p>
+            <p><strong>Animations:</strong> Re-added (as per your changes)</p>
+        </div>
+
+        <div class="status info">
+            <h2>⚠️ Note:</h2>
+            <p>You reverted all performance optimizations back to 0.3s transitions and re-added animations.</p>
+            <p>If you experience lag, this is because the heavy animations and slower transitions are back.</p>
+            <p>The JavaScript error is now fixed though!</p>
+        </div>
+    </div>
+
+    <script src="assets/js/sidebar.js"></script>
+    <script>
+        function testPerformance() {
+            console.log('🧪 Testing sidebar performance...');
+            const sidebar = document.getElementById('adminSidebar');
+            const startTime = performance.now();
+            
+            // Test toggle performance
+            for (let i = 0; i < 10; i++) {
+                sidebar.classList.toggle('collapsed');
+                setTimeout(() => {
+                    sidebar.classList.toggle('collapsed');
+                }, 50);
+            }
+            
+            const endTime = performance.now();
+            console.log(`✅ Performance test completed in ${(endTime - startTime).toFixed(2)}ms`);
+            
+            alert('Performance test completed! Check console for details.');
+        }
+        
+        console.log('🎯 Admin sidebar test loaded successfully');
+        console.log('📱 toggleSidebar() function:', typeof toggleSidebar);
+        console.log('🖥️ toggleSidebarDesktop() function:', typeof toggleSidebarDesktop);
+    </script>
+</body>
+</html>

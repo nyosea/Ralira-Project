@@ -1,0 +1,81 @@
+**DEBUGGING CHECKLIST - Schedule Save Not Working**
+
+Jika jadwal tidak tersimpan dan tanggal tidak berubah hijau, ikuti steps ini:
+
+## 1. BUKA BROWSER CONSOLE (F12)
+- Tekan F12 → Tab "Console"
+- Harus terlihat log messages:
+  ```
+  Schedule script loaded
+  === DOM Content Loaded - Initializing Schedule ===
+  Selected Psychologist: [ID_ANGKA]
+  Loading saved schedules: [ARRAY_DATA]
+  Processed scheduledDates: [OBJECT]
+  === Initialization Complete ===
+  ```
+
+**JIKA ADA ERROR DI CONSOLE:**
+- Screenshot error tersebut dan laporkan apa yang tertulis
+
+## 2. PILIH JAM + TANGGAL, LALU KLIK "SIMPAN JADWAL"
+- Di Console, seharusnya terlihat:
+  ```
+  === SAVE SCHEDULE CLICKED ===
+  Selected Dates: [tanggal-tanggal]
+  Selected Times: [jam-jam]
+  Using psychologist ID: [ID_ANGKA]
+  Sending fetch request...
+  Response status: 200
+  Response data: {success: true, message: "Jadwal berhasil disimpan!"}
+  ```
+
+**JIKA TIDAK ADA LOG INI:**
+- Berarti button click tidak terdaftar
+- Coba buka Tab "Elements" di Dev Tools
+- Cari element dengan id="btnSaveSchedule"
+- Lihat apakah element nya ada atau tidak
+
+## 3. CEK TAB "NETWORK" SAAT KLIK SAVE
+- Tab Network → Filter POST requests
+- Seharusnya ada request ke halaman sendiri (schedule.php)
+- Status harus 200 (bukan 404, 500, dll)
+- Response tab harus menunjukkan: `{"success":true,"message":"Jadwal berhasil disimpan!"}`
+
+**JIKA RESPONSE ERROR (status 500):**
+- Tab Console → lihat error apa yang muncul
+- Mungkin ada syntax error di PHP atau database issue
+
+## 4. SETELAH SAVE - LIHAT RELOAD HALAMAN
+- Halaman seharusnya reload otomatis setelah 1.5 detik
+- Tanggal yang dipilih tadi seharusnya hijau (background color #4caf50)
+- Jika tidak hijau = data tidak tersimpan ke database
+
+## 5. REFRESH HALAMAN (Ctrl+F5)
+- Kalau tanggal tetap hijau setelah refresh = OK, data udah tersimpan
+- Kalau tidak hijau setelah refresh = data hilang, tidak tersimpan di database
+
+---
+
+## QUICK TEST - Copy-paste di Console:
+```javascript
+// Check jika psychologist ID ada
+console.log('Psychologist ID:', window.selectedPsychologistId);
+
+// Check saved schedules dari PHP
+console.log('Saved schedules:', window.savedSchedulesData);
+
+// Check object scheduledDates setelah diproses
+console.log('Processed scheduledDates:', scheduledDates);
+
+// Test save button ada atau tidak
+console.log('Save button:', document.getElementById('btnSaveSchedule'));
+```
+
+---
+
+## REPORT KE DEVELOPER:
+Kalau ada issue, screenshot dan paste:
+1. Console log output (terutama error messages)
+2. Network tab response saat save
+3. Browser version (Chrome/Firefox/Safari)
+4. Langkah mana yang tidak sesuai harapan

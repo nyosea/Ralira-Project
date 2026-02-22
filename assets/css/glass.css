@@ -1,0 +1,58 @@
+/* * Filename: glass.css
+ * Description: Utility classes khusus efek Glassmorphism
+ * Usage: Tambahkan class ini ke elemen HTML yang diinginkan
+ */
+
+/* 1. Panel Kaca Standar (Untuk Card Layanan, Konten Artikel) */
+.glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur); /* Support Safari */
+    border: var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    border-radius: var(--border-radius);
+    overflow: hidden; /* Agar konten tidak keluar dari radius */
+}
+
+/* 2. Panel Kaca Kuat (Untuk Navbar Sticky & Pop-up Chat)
+.glass-solid {
+    background: var(--glass-strong-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: var(--glass-border);
+    box-shadow: var(--glass-strong-shadow);
+} */
+
+/* 3. Input Form Kaca (Untuk Login & Search) */
+.glass-input {
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(4px);
+    border-radius: 8px;
+    padding: 10px 15px;
+    color: var(--color-text);
+    transition: var(--transition-fast);
+}
+
+.glass-input:focus {
+    background: rgba(255, 255, 255, 0.8);
+    outline: 2px solid var(--color-primary);
+    box-shadow: 0 0 10px rgba(251, 186, 0, 0.3);
+}
+
+/* 4. Glass Button (Secondary Actions) */
+.glass-btn {
+    background: rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    color: var(--color-text);
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.glass-btn:hover {
+    background: rgba(255, 255, 255, 0.6);
+    transform: translateY(-2px);
+}

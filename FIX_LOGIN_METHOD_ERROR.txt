@@ -1,0 +1,61 @@
+🔧 FIX FOR "Unknown column 'login_method'" ERROR
+═══════════════════════════════════════════════════════════════════════
+
+❌ PROBLEM:
+   Fatal error: Unknown column 'login_method' in 'INSERT INTO'
+
+✅ SOLUTION:
+   The code has been updated to handle BOTH cases:
+   ✓ With database migration (new columns exist)
+   ✓ Without database migration (old database structure)
+
+   Sekarang Anda bisa register TANPA harus run migration dulu!
+
+═══════════════════════════════════════════════════════════════════════
+
+WHAT WAS FIXED:
+───────────────
+
+1. pages/auth/register.php
+   ├─ Try INSERT with login_method first
+   └─ If error, fallback to INSERT without login_method
+   └─ Works even before migration!
+
+2. pages/auth/google-callback.php
+   ├─ Try INSERT with login_method first
+   └─ If error, fallback to INSERT without login_method
+   └─ Google OAuth works even before migration!
+
+3. pages/auth/forgot-password.php
+   ├─ Try SELECT login_method first
+   ├─ If column doesn't exist, fallback to manual detection
+   └─ Forgot password works even before migration!
+
+═══════════════════════════════════════════════════════════════════════
+
+NOW YOU CAN:
+────────────
+
+✓ Register with email + password (works immediately!)
+✓ Use Google OAuth (works immediately!)
+✓ Try forgot password (works immediately!)
+✓ Run migration later when ready: http://localhost/ralira_project/run_migration.php
+
+═══════════════════════════════════════════════════════════════════════
+
+NEXT STEPS:
+───────────
+
+1. Try register again - should work now!
+   → pages/auth/register.php
+
+2. When you're ready, run the migration:
+   → http://localhost/ralira_project/run_migration.php
+
+3. After migration, the smart flow works perfectly:
+   ✓ Manual users can reset password
+   ✓ Google users see special message
+
+═══════════════════════════════════════════════════════════════════════
+
+✨ All code is backward compatible now!

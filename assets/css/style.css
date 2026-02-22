@@ -1,0 +1,424 @@
+/* * Filename: assets/css/style.css
+ * Project: Biro Psikologi Rali Ra
+ * Description: Master Stylesheet (Gabungan Global, Dashboard Support, & New Landing Page)
+ */
+
+/* =========================================
+   1. VARIABLES & SETUP
+   ========================================= */
+:root {
+    /* --- COLOR PALETTE (Rali Ra Identity) --- */
+    --color-bg: #F4EED8;       /* Eggshell (Background Utama) */
+    --color-primary: #FBBA00;  /* Selective Yellow (Tombol/Aksen) */
+    --color-primary-hover: #e0a600;
+    --color-accent: #E5781E;   /* Vivid Tangelo (Highlight) */
+    --color-text: #5A3D2B;     /* Royal Brown (Teks Utama) */
+    --color-text-light: #8b6b58;
+    --color-white: #ffffff;
+    
+    /* Status Colors */
+    --status-success: #28a745;
+    --status-warning: #ffc107;
+    --status-danger: #dc3545;
+
+    /* --- GLASSMORPHISM VARS --- */
+    --glass-bg: rgba(255, 255, 255, 0.45);
+    --glass-border: 1px solid rgba(255, 255, 255, 0.6);
+    --glass-shadow: 0 8px 32px 0 rgba(90, 61, 43, 0.1);
+    --glass-blur: blur(12px);
+    
+    /* Strong Glass (Untuk Sidebar/Navbar) */
+    --glass-strong-bg: rgba(255, 255, 255, 0.85);
+    --glass-strong-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+
+    /* --- TYPOGRAPHY --- */
+    --font-main: 'Poppins', sans-serif;
+    --border-radius: 16px;
+    --border-radius-lg: 24px;
+    
+    /* --- TRANSITIONS --- */
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease-in-out;
+}
+
+/* =========================================
+   2. GLOBAL BASE STYLES
+   ========================================= */
+
+/* Ensure hamburger menu is visible on landing page */
+
+/* .mobile-toggle {
+    display: flex !important;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+} */
+
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.6;
+    position: relative;
+
+    /* BACKGROUND DECORATION (New Landing Style) 
+       Tetap aman untuk Dashboard karena tertutup container utama */
+    background-image: 
+        radial-gradient(at 0% 0%, rgba(251, 186, 0, 0.15) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(229, 120, 30, 0.1) 0px, transparent 40%),
+        radial-gradient(at 100% 100%, rgba(229, 120, 30, 0.15) 0px, transparent 50%),
+        radial-gradient(at 0% 100%, rgba(251, 186, 0, 0.1) 0px, transparent 40%);
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+a { text-decoration: none; color: inherit; transition: var(--transition-fast); }
+ul { list-style: none; }
+img { max-width: 100%; display: block; }
+
+/* Scrollbar Customization */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: rgba(90, 61, 43, 0.05); }
+::-webkit-scrollbar-thumb { background: rgba(229, 120, 30, 0.5); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-accent); }
+
+
+/* =========================================
+   3. GLASSMORPHISM UTILITIES (GLOBAL)
+   ========================================= */
+
+/* A. Panel Kaca Standar (Dipakai di Dashboard & Card Umum) */
+.glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    border-radius: var(--border-radius);
+    position: relative;
+    /* overflow: hidden; -> Hapus ini jika tooltip/dropdown terpotong */ 
+}
+
+/* B. Panel Kaca Solid (Navbar Sticky, Sidebar, Modal) */
+.glass-solid {
+    background: var(--glass-strong-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: var(--glass-border);
+    box-shadow: var(--glass-strong-shadow);
+}
+
+/* C. Input Form Kaca (Login, Search, Form Dashboard) */
+.glass-input {
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(4px);
+    border-radius: 8px;
+    padding: 10px 15px;
+    color: var(--color-text);
+    transition: var(--transition-fast);
+    font-family: inherit;
+}
+
+.glass-input:focus {
+    background: rgba(255, 255, 255, 0.9);
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(251, 186, 0, 0.2);
+}
+
+/* D. Glass Button (Secondary) */
+.glass-btn {
+    background: rgba(255, 255, 255, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    color: var(--color-text);
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-fast);
+    display: inline-block;
+    text-align: center;
+}
+
+.glass-btn:hover {
+    background: rgba(255, 255, 255, 0.8);
+    transform: translateY(-2px);
+    color: var(--color-accent);
+}
+
+
+/* =========================================
+   4. COMPONENTS (BUTTONS & AUTH)
+   ========================================= */
+
+/* Primary Button */
+.btn-primary {
+    background-color: var(--color-primary);
+    color: var(--color-text);
+    padding: 10px 24px;
+    border-radius: 50px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: var(--transition-normal);
+    display: inline-block;
+    text-align: center;
+}
+
+.btn-primary:hover {
+    background-color: var(--color-primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+/* Google Button (Login Page) */
+.btn-google {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: var(--color-white);
+    border: 1px solid #ddd;
+    color: #555;
+    width: 100%;
+    margin-top: 10px;
+}
+
+/* --- AUTH PAGES (Login/Register) --- */
+.auth-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Gunakan background dekoratif body atau gambar spesifik */
+    padding: 20px;
+}
+
+.auth-box {
+    width: 100%;
+    max-width: 400px;
+    padding: 40px;
+    text-align: center;
+    /* Inherit glass-panel styles */
+}
+
+
+/* =========================================
+   5. LANDING PAGE SPECIFIC STYLES (NEW DESIGN)
+   ========================================= */
+
+/* A. Navbar Baru (Glass Nav dengan Tailwind) */
+.glass-nav {
+    background: rgba(244, 238, 216, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    transition: all 0.3s ease;
+}
+
+/* B. Kartu Kaca Baru (Untuk Slider Layanan & Tim) */
+.glass-card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.3));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 4px 20px rgba(90, 61, 43, 0.05);
+    border-radius: var(--border-radius-lg);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+    overflow: hidden;
+    position: relative;
+}
+
+.glass-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(229, 120, 30, 0.15);
+    border-color: var(--color-primary);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.5));
+}
+
+/* Efek Shine pada Card */
+.glass-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+    transform: skewX(-25deg);
+    transition: 0.5s;
+    pointer-events: none;
+}
+.glass-card:hover::before { left: 150%; transition: 0.7s; }
+
+/* C. Slider Utilities */
+.hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+.hide-scroll::-webkit-scrollbar { display: none; }
+.snap-x { scroll-snap-type: x mandatory; }
+.snap-center { scroll-snap-align: center; }
+
+/* D. Animations */
+@keyframes float {
+    0% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(5deg); }
+    100% { transform: translateY(0px) rotate(0deg); }
+}
+.animate-float { animation: float 6s ease-in-out infinite; }
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in-up { animation: fadeInUp 1s ease-out forwards; }
+
+@keyframes pulse-green {
+    0% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(40, 167, 69, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0); }
+}
+.animate-pulse-green { animation: pulse-green 2s infinite; }
+
+
+/* =========================================
+   6. CHAT WIDGET (GLOBAL)
+   ========================================= */
+/* Tombol Chat Mengambang */
+.chat-trigger {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 64px;
+    height: 64px;
+    background: var(--color-accent);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    box-shadow: 0 8px 25px rgba(229, 120, 30, 0.4);
+    cursor: pointer;
+    z-index: 9999;
+    border: none;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.chat-trigger:hover {
+    transform: scale(1.1) rotate(10deg);
+    background: #d66a15;
+}
+
+/* Kotak Chat */
+#chat-box, .chat-popup {
+    position: fixed;
+    bottom: 100px;
+    right: 30px;
+    width: 350px;
+    height: 450px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+    display: none; /* Hidden by default - JavaScript will show this */
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 9998;
+    border: 1px solid rgba(255,255,255,0.8);
+    
+    /* Transisi */
+    transform-origin: bottom right;
+    transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.4s ease;
+}
+
+/* Header & Body Chat */
+.chat-header {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+    padding: 15px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chat-body {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+    font-size: 0.9rem;
+    background: rgba(244, 238, 216, 0.3);
+}
+
+.chat-input {
+    padding: 15px;
+    background: white;
+    border-top: 1px solid rgba(0,0,0,0.05);
+    display: flex;
+    gap: 10px;
+}
+
+
+/* =========================================
+   7. SERVICES GRID (LEGACY SUPPORT)
+   ========================================= */
+/* Diperlukan jika halaman lain (selain Landing) masih pakai grid biasa */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.service-card {
+    transition: var(--transition-normal);
+    text-align: center;
+}
+
+.service-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 1px solid rgba(255,255,255,0.3);
+}
+
+.service-info { padding: 20px; }
+
+
+/* =========================================
+   8. FOOTER STYLES
+   ========================================= */
+footer {
+    /* Tailwind menangani footer baru, tapi ini fallback untuk halaman lain */
+    background-color: var(--color-text);
+    color: var(--color-bg);
+    margin-top: auto;
+}
+
+
+/* =========================================
+   9. RESPONSIVE ADJUSTMENTS
+   ========================================= */
+@media screen and (max-width: 768px) {
+    /* Auth Pages */
+    .auth-box { padding: 30px 20px; }
+    
+    /* Chat Widget Mobile */
+    #chat-box, .chat-popup {
+        width: 90%;
+        right: 5%;
+        bottom: 100px;
+        height: 60vh;
+    }
+    
+    /* Typography Scale */
+    html { font-size: 15px; }
+}

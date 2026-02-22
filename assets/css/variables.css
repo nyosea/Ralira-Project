@@ -1,0 +1,58 @@
+/* * Filename: variables.css
+ * Description: Menyimpan semua variabel global (Warna, Font, Efek Glass)
+ * Reference: Color Palette Rali Ra [Source: 502]
+ */
+
+:root {
+    /* --- COLOR PALETTE (Rali Ra Identity) --- */
+    /* Background Utama (Eggshell) - Memberikan kesan hangat & family friendly */
+    /* --color-bg: #F4EED8;  */
+    
+    /* Primary Action / Buttons (Selective Yellow) - Ceria & Energetik */
+    --color-primary: #FBBA00;
+    --color-primary-hover: #e0a600;
+    
+    /* Accent / Alert / Hover (Vivid Tangelo) */
+    --color-accent: #E5781E;
+    
+    /* Text / Footer / Strong Elements (Royal Brown) - Kontras & Profesional */
+    --color-text: #5A3D2B;
+    --color-text-light: #8b6b58;
+    
+    /* Status Colors (Untuk Dashboard) */
+    --status-success: #28a745; /* Terkonfirmasi/Selesai */
+    --status-warning: #ffc107; /* Menunggu Verifikasi */
+    --status-danger: #dc3545;  /* Ditolak/Error */
+    --color-white: #ffffff;
+
+    /* --- TYPOGRAPHY --- */
+    --font-main: 'Poppins', sans-serif; /* Modern & Friendly */
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.875rem;
+    --font-size-base: 1rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.25rem;
+    --font-size-2xl: 1.5rem;
+
+    /* --- GLASSMORPHISM CONFIGURATION --- */
+    /* Base Glass (Untuk Card, Sidebar, Container) */
+    --glass-bg: rgba(255, 255, 255, 0.45); /* Transparansi Putih */
+    --glass-border: 1px solid rgba(255, 255, 255, 0.6); /* Border tipis mengkilap */
+    --glass-shadow: 0 8px 32px 0 rgba(90, 61, 43, 0.1); /* Shadow lembut warna Royal Brown */
+    --glass-blur: blur(12px); /* Efek blur latar belakang */
+    
+    /* Strong Glass (Untuk Header/Navbar/Modal) */
+    --glass-strong-bg: rgba(255, 255, 255, 0.75);
+    --glass-strong-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+
+    /* --- LAYOUT SPACING --- */
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    --border-radius: 16px; /* Rounded corners untuk kesan friendly [Source: 741] */
+    
+    /* --- TRANSITIONS --- */
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease-in-out;
+}

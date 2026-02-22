@@ -1,0 +1,14 @@
+/* responsive_sections.css - placeholder for page-specific responsive tweaks
+   Added to prevent 404 and provide scoped responsive helpers for history page.
+   You can extend this file with rules for .history-table, .history-header, etc. */
+
+/* Basic responsive helpers */
+@media (max-width: 768px) {
+  .history-header { padding: 12px; }
+  .history-table .table-th-content span { display: none; }
+  .history-table .table-th-content i { margin-right: 0; }
+  .table-scroll-wrapper { overflow-x: auto; }
+}
+
+/* Small visual tweak for export button spacing */
+.table-actions .export-btn { padding: 8px 12px; }

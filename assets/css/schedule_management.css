@@ -1,0 +1,2100 @@
+/**
+ * Schedule Management CSS
+ * Styling untuk fitur manajemen jadwal psikolog
+ */
+
+/* ========================================
+   PAGE HEADER & PSYCHOLOGIST SELECTOR
+   ======================================== */
+
+/* psychologist-selector */
+.psychologist-selector {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    border: 1px solid #e1e8ed;
+    margin-bottom: 30px;
+}
+
+.psychologist-selector-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.psychologist-selector-title h3 {
+    margin: 0;
+    color: var(--color-text);
+    font-size: 20px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.psychologist-selector-title h3 i {
+    color: var(--color-primary);
+    font-size: 18px;
+}
+
+.psychologist-selector-title p {
+    margin: 5px 0 0 0;
+    color: #6c757d;
+    font-size: 14px;
+}
+
+.psychologist-selector-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.psychologist-avatar {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.psychologist-avatar i {
+    color: white;
+    font-size: 18px;
+}
+
+.main-content h2::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    animation: headerShimmer 3s ease-in-out infinite;
+}
+
+@keyframes headerShimmer {
+    0% { left: -100%; }
+    50% { left: 100%; }
+    100% { left: 100%; }
+}
+
+.main-content h2 i {
+    color: var(--color-primary);
+    font-size: 1.6rem;
+    animation: iconPulse 2s ease-in-out infinite;
+}
+
+@keyframes iconPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.psychologist-select {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border: none;
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+.psychologist-select::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #ff6b6b, var(--color-primary), #4ecdc4);
+    border-radius: 16px 16px 0 0;
+}
+
+.psychologist-select label {
+    display: block;
+    font-weight: 700;
+    margin-bottom: 12px;
+    font-size: 1.1rem;
+    color: var(--color-text);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.psychologist-select label i {
+    color: var(--color-primary);
+    font-size: 1.2rem;
+    animation: labelIconFloat 3s ease-in-out infinite;
+}
+
+@keyframes labelIconFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+}
+
+.psychologist-select select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    background: white;
+    color: var(--color-text);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    appearance: menulist;
+    background-image: none;
+    padding-right: 15px;
+}
+
+.psychologist-select:hover select {
+    border-color: var(--color-primary);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.psychologist-select select:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(251, 186, 0, 0.1);
+}
+
+.psychologist-select select:active {
+    transform: none;
+}
+
+/* Enhanced Success/Error Messages */
+.main-content > div[style*="background"],
+.schedule-notification {
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    border-left: 5px solid;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    animation: slideInDown 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.main-content > div[style*="background"]::before,
+.schedule-notification::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    animation: messageShimmer 2s ease-in-out;
+}
+
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes messageShimmer {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+.main-content > div[style*="#ffebee"] {
+    background: linear-gradient(135deg, #ffebee, #ffcdd2) !important;
+    color: #c62828 !important;
+    border-left-color: #f44336 !important;
+    box-shadow: 0 4px 15px rgba(244, 67, 54, 0.1);
+}
+
+.main-content > div[style*="#e8f5e9"] {
+    background: linear-gradient(135deg, #e8f5e9, #c8e6c9) !important;
+    color: #2e7d32 !important;
+    border-left-color: #4caf50 !important;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.1);
+}
+
+.main-content > div[style*="#ffebee"] i {
+    color: #f44336 !important;
+    font-size: 1.2rem;
+    animation: errorShake 0.5s ease;
+}
+
+.main-content > div[style*="#e8f5e9"] i {
+    color: #4caf50 !important;
+    font-size: 1.2rem;
+    animation: successBounce 0.6s ease;
+}
+
+@keyframes errorShake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+@keyframes successBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+/* ========================================
+   PSYCHOLOGIST SCHEDULE PAGE STYLES
+   ======================================== */
+
+/* Time Slot Selector - Enhanced for Psychologist */
+.time-slot-selector {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border: none;
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 25px;
+}
+
+.time-slot-selector::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-primary), #ff6b6b, #4ecdc4);
+    border-radius: 16px 16px 0 0;
+}
+
+.time-slot-selector h3 {
+    margin: 0 0 20px 0;
+    color: var(--color-text);
+    font-size: 1.2rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.time-slot-selector h3 i {
+    color: var(--color-primary);
+    font-size: 1.3rem;
+}
+
+.time-slot-info {
+    font-size: 0.85rem;
+    color: var(--color-text-light);
+    margin-bottom: 15px;
+    padding: 12px;
+    background: rgba(251, 186, 0, 0.1);
+    border-left: 3px solid var(--color-primary);
+    border-radius: 8px;
+    text-align: center;
+}
+
+.time-slot-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.time-slot-item {
+    position: relative;
+}
+
+.time-slot-checkbox {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.time-slot-label {
+    display: block;
+    padding: 12px 15px;
+    background: white;
+    border: 2px solid #e1e8ed;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    color: var(--color-text);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Explicit state classes to control cursor & affordance */
+.time-slot-label.enabled {
+    cursor: pointer !important;
+    opacity: 1 !important;
+}
+.time-slot-label.not-allowed {
+    cursor: not-allowed !important;
+    opacity: 0.6 !important;
+}
+
+.time-slot-label i {
+    margin-right: 8px;
+    color: var(--color-primary);
+}
+
+.time-slot-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-clear-times {
+    flex: 1;
+    padding: 12px 20px;
+    background: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+/* ========================================
+   TIME SLOT SELECTOR STYLES
+   ======================================== */
+
+.schedule-management-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+@media (max-width: 1024px) {
+    .schedule-management-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Time Slot Selection Box */
+.time-slot-selector {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border: none;
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+.time-slot-selector::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-primary), #ff6b6b, #4ecdc4);
+    border-radius: 16px 16px 0 0;
+}
+
+.time-slot-selector h3 {
+    margin: 0 0 20px 0;
+    color: var(--color-text);
+    font-size: 1.2rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.time-slot-selector h3 i {
+    color: var(--color-primary);
+    font-size: 1.3rem;
+}
+
+.time-slot-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.time-slot-item {
+    position: relative;
+}
+
+.time-slot-checkbox {
+    display: none;
+}
+
+
+.time-slot-label::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    transition: all 0.4s ease;
+    border-radius: 50%;
+}
+
+.time-slot-label:hover {
+    background: linear-gradient(135deg, #e9ecef, #dee2e6);
+    border-color: var(--color-primary);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.time-slot-label:hover::before {
+    width: 100px;
+    height: 100px;
+}
+
+.time-slot-checkbox:checked + .time-slot-label {
+    background: linear-gradient(135deg, var(--color-primary), #2c3e50);
+    color: white;
+    border-color: var(--color-primary);
+    box-shadow: 0 8px 25px rgba(251, 186, 0, 0.4);
+    font-weight: 700;
+    transform: translateY(-2px) scale(1.05);
+    position: relative;
+}
+
+.time-slot-checkbox:checked + .time-slot-label::after {
+    content: '✓';
+    position: absolute;
+    top: 4px;
+    right: 8px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: white;
+    background: rgba(255, 255, 255, 0.2);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: checkPop 0.3s ease;
+}
+
+@keyframes checkPop {
+    0% { transform: scale(0); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+.time-slot-info {
+    font-size: 0.85rem;
+    color: var(--color-text-light);
+    margin-bottom: 15px;
+    padding: 10px;
+    background: rgba(251, 186, 0, 0.1);
+    border-left: 3px solid var(--color-primary);
+    border-radius: 4px;
+}
+
+.time-slot-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: auto;
+}
+
+/* Enhanced Button Styles */
+.btn-apply-times {
+    flex: 1;
+    padding: 14px 18px;
+    background: linear-gradient(135deg, var(--color-primary), #2c3e50);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-apply-times::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+.btn-apply-times:hover::before {
+    left: 100%;
+}
+
+.btn-apply-times:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 12px 30px rgba(251, 186, 0, 0.4);
+    background: linear-gradient(135deg, #f9a825, #f57f17);
+}
+
+.btn-apply-times:active {
+    transform: translateY(0);
+}
+
+.btn-apply-times:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.btn-clear-times {
+    padding: 14px 18px;
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    color: var(--color-text-light);
+    border: 2px solid #e9ecef;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-clear-times::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0,0,0,0.05), transparent);
+    transition: left 0.5s;
+}
+
+.btn-clear-times:hover::before {
+    left: 100%;
+}
+
+.btn-clear-times:hover {
+    background: linear-gradient(135deg, #e9ecef, #dee2e6);
+    border-color: var(--color-text);
+    color: var(--color-text);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* ========================================
+   CALENDAR STYLES
+   ======================================== */
+
+.calendar-selector {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border: none;
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+.calendar-selector::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #4ecdc4, var(--color-primary), #ff6b6b);
+    border-radius: 16px 16px 0 0;
+}
+
+.calendar-selector h3 {
+    margin: 0 0 20px 0;
+    color: var(--color-text);
+    font-size: 1.2rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.calendar-selector h3 i {
+    color: var(--color-primary);
+    font-size: 1.3rem;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid var(--color-border);
+}
+
+.calendar-month-year {
+    font-weight: 800;
+    font-size: 1.2rem;
+    color: var(--color-primary);
+    text-align: center;
+    flex: 1;
+    text-shadow: 0 2px 4px rgba(251, 186, 0, 0.1);
+    position: relative;
+}
+
+.calendar-month-year::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: radial-gradient(circle, rgba(251, 186, 0, 0.05) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    transition: all 0.4s ease;
+    border-radius: 50%;
+}
+
+.calendar-month-year:hover::before {
+    width: 150px;
+    height: 150px;
+}
+
+.calendar-nav {
+    display: flex;
+    gap: 8px;
+}
+
+/* Calendar Navigation Buttons - Enhanced */
+#btnPrevMonth, #btnNextMonth {
+    background: linear-gradient(135deg, var(--color-primary), #f9a825);
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 1rem;
+    box-shadow: 0 4px 15px rgba(251, 186, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+    min-width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#btnPrevMonth::before, #btnNextMonth::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+#btnPrevMonth:hover::before, #btnNextMonth:hover::before {
+    left: 100%;
+}
+
+#btnPrevMonth:hover, #btnNextMonth:hover {
+    background: linear-gradient(135deg, #f9a825, #f57f17);
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(251, 186, 0, 0.3);
+}
+
+#btnPrevMonth:active, #btnNextMonth:active {
+    transform: translateY(0) scale(1);
+}
+
+#btnPrevMonth i, #btnNextMonth i {
+    font-size: 1.1rem;
+    transition: transform 0.2s ease;
+}
+
+#btnPrevMonth:hover i {
+    transform: translateX(-2px);
+}
+
+#btnNextMonth:hover i {
+    transform: translateX(2px);
+}
+
+.calendar-nav button {
+    background: linear-gradient(135deg, var(--color-primary), #f9a825);
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 0.9rem;
+    box-shadow: 0 4px 15px rgba(251, 186, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+    min-width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.calendar-nav button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+.calendar-nav button:hover::before {
+    left: 100%;
+}
+
+.calendar-nav button:hover {
+    background: linear-gradient(135deg, #f9a825, #f57f17);
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(251, 186, 0, 0.3);
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.calendar-day-name {
+    text-align: center;
+    font-weight: 700;
+    padding: 10px 5px;
+    color: var(--color-primary);
+    font-size: 0.9rem;
+    border-bottom: 2px solid var(--color-border);
+}
+
+.calendar-day {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px solid transparent;
+    font-weight: 600;
+    font-size: 0.95rem;
+    position: relative;
+    background: white;
+    flex-direction: column;
+    overflow: hidden;
+    color: var(--color-text);
+}
+
+.calendar-day::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: radial-gradient(circle, rgba(78, 205, 196, 0.1) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    transition: all 0.4s ease;
+    border-radius: 50%;
+}
+
+.calendar-day.other-month {
+    color: #ccc;
+    background: white;
+    cursor: default;
+    opacity: 0.5;
+}
+
+.calendar-day.available {
+    background: linear-gradient(135deg, #e8f5e8, #c8e6c9);
+    border-color: #4caf50;
+    color: #2e7d32;
+    font-weight: 700;
+    position: relative;
+}
+
+.calendar-day.available::after {
+    content: '•';
+    position: absolute;
+    top: 2px;
+    right: 6px;
+    font-size: 1.2rem;
+    color: #4caf50;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.calendar-day:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    background: #f8f9fa;
+}
+
+.calendar-day:hover::before {
+    width: 120px;
+    height: 120px;
+}
+
+.calendar-day.available.selected {
+    background: linear-gradient(135deg, #4caf50, #388e3c);
+    color: white;
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(76, 175, 80, 0.4);
+    border-color: #2e7d32;
+}
+
+.calendar-day.available.selected::after {
+    content: '✓';
+    color: white;
+    font-size: 0.9rem;
+    top: 3px;
+    right: 5px;
+}
+
+.calendar-day.no-times {
+    background: white;
+    color: var(--color-text);
+    border: 1px solid #e9ecef;
+    cursor: pointer;
+}
+
+.calendar-day.no-times:hover {
+    background: #f8f9fa;
+    border-color: #dee2e6;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px);
+}
+
+.calendar-day.today {
+    border-color: var(--color-primary);
+    border-width: 2px;
+    background: white;
+    color: var(--color-primary);
+    font-weight: 800;
+    transform: scale(1.05);
+    box-shadow: 0 2px 8px rgba(251, 186, 0, 0.2);
+}
+
+.calendar-day.today::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border: 1px solid var(--color-primary);
+    border-radius: 14px;
+    animation: todayGlow 2s ease-in-out infinite;
+}
+
+@keyframes todayGlow {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.6; }
+}
+
+.calendar-day-date {
+    font-size: 1rem;
+    line-height: 1;
+}
+
+.calendar-day.has-schedule {
+    background: linear-gradient(135deg, #e8f5e8, #c8e6c9);
+    border-color: #4caf50;
+    color: #2e7d32;
+    font-weight: 600;
+    position: relative;
+}
+
+.calendar-day.has-schedule::after {
+    content: '•';
+    position: absolute;
+    top: 2px;
+    right: 5px;
+    color: #4caf50;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.calendar-day.has-schedule.selected {
+    background: linear-gradient(135deg, #4caf50, #388e3c);
+    color: white;
+    transform: translateY(-2px) scale(1.05);
+    border-color: #2e7d32;
+    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+}
+
+.calendar-day.has-schedule.selected::after {
+    content: '✓';
+    color: white;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.calendar-legend {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid var(--color-border);
+    flex-wrap: wrap;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: var(--color-text);
+}
+
+.legend-box {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    border: 2px solid transparent;
+}
+
+.legend-box.available {
+    background: #28a745;
+}
+
+.legend-box.no-times {
+    background: #fff3cd;
+    border-color: #ffc107;
+}
+
+.legend-box.today {
+    border-color: var(--color-primary);
+    background: white;
+}
+
+/* ========================================
+   MODAL & NOTIFICATION STYLES
+   ======================================== */
+
+.schedule-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 16px 20px;
+    background: white;
+    border-left: 4px solid var(--color-primary);
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    animation: slideInRight 0.3s ease;
+    max-width: 400px;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.schedule-notification.success {
+    border-left-color: #4caf50;
+    background: #f1f8e9;
+    color: #2e7d32;
+}
+
+.schedule-notification.info {
+    border-left-color: var(--color-primary);
+    background: #fff8e1;
+    color: #f57f17;
+}
+
+.schedule-notification.error {
+    border-left-color: #f44336;
+    background: #ffebee;
+    color: #c62828;
+}
+
+.schedule-notification-title {
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.schedule-notification-message {
+    font-size: 0.9rem;
+}
+
+.schedule-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    align-items: center;
+    justify-content: center;
+}
+
+.schedule-modal.active {
+    display: flex;
+}
+
+.schedule-modal-content {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.schedule-modal-header {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.schedule-modal-header i {
+    color: var(--color-primary);
+    font-size: 1.5rem;
+}
+
+.schedule-modal-body {
+    margin-bottom: 20px;
+    color: var(--color-text-light);
+    line-height: 1.6;
+}
+
+.schedule-modal-footer {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.schedule-modal-footer button {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.2s;
+}
+
+.schedule-modal-footer .btn-confirm {
+    background: var(--color-primary);
+    color: white;
+}
+
+.schedule-modal-footer .btn-confirm:hover {
+    background: var(--color-primary-dark, #1565c0);
+    transform: translateY(-1px);
+}
+
+.schedule-modal-footer .btn-cancel {
+    background: #f0f0f0;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+}
+
+.schedule-modal-footer .btn-cancel:hover {
+    background: #e0e0e0;
+}
+
+/* ========================================
+   SELECTED DATES DISPLAY
+   ======================================== */
+
+.selected-dates-container {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 2px solid var(--color-border);
+}
+
+.selected-dates-container h4 {
+    margin: 0 0 12px 0;
+    color: var(--color-text);
+    font-weight: 700;
+}
+
+.selected-dates-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.selected-date-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 12px;
+    background: #f0f0f0;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    color: var(--color-text);
+}
+
+.selected-date-item .date-text {
+    font-weight: 600;
+}
+
+.selected-date-item .time-text {
+    font-size: 0.85rem;
+    color: var(--color-text-light);
+}
+
+.selected-date-item .btn-remove {
+    background: none;
+    border: none;
+    color: #f44336;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: color 0.2s;
+}
+
+.selected-date-item .btn-remove:hover {
+    color: #d32f2f;
+}
+
+/* ========================================
+   SAVED SCHEDULE DISPLAY
+   ======================================== */
+
+.saved-schedule-container {
+    background: #f9f9f9;
+    border: 2px solid var(--color-border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.saved-schedule-container h4 {
+    margin: 0 0 15px 0;
+    color: var(--color-text);
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.saved-schedule-container h4 i {
+    color: #4caf50;
+}
+
+.saved-schedule-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.saved-schedule-item {
+    padding: 12px 15px;
+    background: white;
+    border-left: 4px solid var(--color-primary);
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.saved-schedule-item-date {
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: 3px;
+}
+
+.saved-schedule-item-time {
+    font-size: 0.85rem;
+    color: var(--color-text-light);
+}
+
+.saved-schedule-item-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-edit-schedule {
+    padding: 6px 10px;
+    background: var(--color-primary);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.btn-edit-schedule:hover {
+    background: var(--color-primary-dark, #1565c0);
+}
+
+.btn-delete-schedule {
+    padding: 6px 10px;
+    background: #f44336;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.btn-delete-schedule:hover {
+    background: #d32f2f;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN - COMPREHENSIVE BREAKPOINTS
+   ======================================== */
+
+/* Desktop/Large (1920px+) - Default styles apply */
+
+/* Large Laptop (1440px - 1919px) */
+@media screen and (max-width: 1919px) {
+    .schedule-management-container {
+        gap: 20px;
+    }
+
+    .time-slot-selector,
+    .calendar-selector {
+        padding: 20px;
+    }
+}
+
+/* Laptop (1024px - 1439px) */
+@media screen and (max-width: 1439px) {
+    .schedule-management-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .time-slot-selector h3,
+    .calendar-selector h3 {
+        font-size: 1.1rem;
+    }
+
+    .time-slot-grid {
+        grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+    }
+
+    .calendar-grid {
+        gap: 6px;
+    }
+
+    .calendar-day {
+        font-size: 0.9rem;
+    }
+}
+
+/* Tablet (768px - 1024px) */
+@media screen and (max-width: 1024px) {
+    .schedule-management-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        margin-bottom: 20px;
+    }
+
+    .time-slot-selector,
+    .calendar-selector {
+        padding: 18px;
+        border-radius: 10px;
+    }
+
+    .time-slot-selector h3,
+    .calendar-selector h3 {
+        font-size: 1rem;
+        margin-bottom: 15px;
+    }
+
+    .time-slot-grid {
+        grid-template-columns: repeat(auto-fit, minmax(65px, 1fr));
+        gap: 8px;
+        margin-bottom: 15px;
+    }
+
+    .time-slot-label {
+        padding: 10px 6px;
+        font-size: 0.85rem;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .calendar-grid {
+        gap: 5px;
+    }
+
+    .calendar-day {
+        font-size: 0.85rem;
+        border-radius: 6px;
+    }
+
+    .calendar-nav {
+        flex-direction: row;
+        gap: 6px;
+    }
+
+    .calendar-nav button {
+        padding: 6px 10px;
+        font-size: 0.85rem;
+        flex: 1;
+    }
+
+    .btn-apply-times,
+    .btn-clear-times {
+        padding: 10px 12px;
+        font-size: 0.9rem;
+    }
+
+    .schedule-modal-content {
+        max-width: 90%;
+        padding: 20px;
+    }
+
+    .legend-item {
+        font-size: 0.8rem;
+    }
+
+    .selected-dates-list,
+    .saved-schedule-list {
+        max-height: 150px;
+    }
+}
+
+/* Mobile Large (480px - 767px) */
+@media screen and (max-width: 767px) {
+    /* Header & Psychologist Selector */
+
+    .main-content h2 i {
+        font-size: 1.4rem;
+    }
+
+    .psychologist-select {
+        padding: 20px;
+        border-radius: 12px;
+    }
+
+    .psychologist-select label {
+        font-size: 1rem;
+        margin-bottom: 10px;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .psychologist-select label i {
+        font-size: 1.1rem;
+    }
+
+    .psychologist-select select {
+        padding: 14px 18px;
+        font-size: 0.95rem;
+        border-radius: 10px;
+        padding-right: 45px;
+        background-size: 18px;
+    }
+
+    .psychologist-select:hover select {
+        transform: translateY(-1px);
+    }
+
+    .psychologist-select select:focus {
+        transform: translateY(-1px) scale(1.005);
+    }
+
+    /* Success/Error Messages */
+    .main-content > div[style*="background"],
+    .schedule-notification {
+        padding: 14px 16px;
+        margin-bottom: 15px;
+        border-radius: 10px;
+        font-size: 0.9rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .main-content > div[style*="background"] i,
+    .schedule-notification i {
+        font-size: 1.1rem;
+    }
+
+    .schedule-management-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        margin-bottom: 20px;
+    }
+
+    .time-slot-selector,
+    .calendar-selector {
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .time-slot-selector h3,
+    .calendar-selector h3 {
+        font-size: 1rem;
+        margin-bottom: 15px;
+        flex-direction: column;
+        text-align: center;
+        gap: 8px;
+    }
+
+    .time-slot-selector h3 i,
+    .calendar-selector h3 i {
+        font-size: 1.2rem;
+    }
+
+    .time-slot-info {
+        font-size: 0.8rem;
+        padding: 12px;
+        margin-bottom: 15px;
+        border-radius: 8px;
+        text-align: center;
+    }
+
+    .time-slot-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        margin-bottom: 15px;
+    }
+
+    .time-slot-label {
+        padding: 12px 8px;
+        font-size: 0.85rem;
+        min-height: 50px;
+        border-radius: 10px;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .time-slot-actions {
+        gap: 12px;
+        flex-direction: column;
+    }
+
+    .btn-apply-times,
+    .btn-clear-times {
+        padding: 14px;
+        font-size: 0.9rem;
+        width: 100%;
+        border-radius: 10px;
+        min-height: 50px;
+    }
+
+    /* Fix for psychologist schedule page - ensure proper layout */
+    .main-content > div[style*="grid-template-columns: 1fr 1fr"] {
+        grid-template-columns: 1fr !important;
+        gap: 20px;
+    }
+
+    /* Calendar improvements for mobile */
+    .calendar-header {
+        gap: 12px;
+        padding-bottom: 12px;
+        gap: 12px;
+    }
+
+    .calendar-month-year {
+        font-size: 1rem;
+        order: -1;
+    }
+
+    .calendar-nav {
+        justify-content: center;
+        gap: 12px;
+    }
+
+    .calendar-nav button {
+        padding: 10px 16px;
+        font-size: 0.85rem;
+        min-width: 80px;
+        border-radius: 8px;
+    }
+
+    .calendar-grid {
+        gap: 6px;
+        margin-bottom: 12px;
+    }
+
+    .calendar-day-name {
+        padding: 8px 2px;
+        font-size: 0.75rem;
+        font-weight: 600;
+    }
+
+    .calendar-day {
+        font-size: 0.85rem;
+        border-radius: 10px;
+        border-width: 1px;
+        min-height: 45px;
+    }
+
+    .calendar-day:hover {
+        transform: translateY(-2px) scale(1.02);
+    }
+
+    .calendar-legend {
+        gap: 12px;
+        margin-top: 12px;
+        padding-top: 12px;
+        justify-content: center;
+    }
+
+    .legend-item {
+        font-size: 0.75rem;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .legend-box {
+        width: 18px;
+        height: 18px;
+    }
+
+    .selected-dates-container,
+    .saved-schedule-container {
+        padding: 18px;
+        margin-top: 18px;
+        border-radius: 12px;
+    }
+
+    .selected-dates-container h4,
+    .saved-schedule-container h4 {
+        font-size: 0.95rem;
+        margin-bottom: 12px;
+        text-align: center;
+    }
+
+    .selected-dates-list,
+    .saved-schedule-list {
+        gap: 8px;
+        max-height: 150px;
+    }
+
+    .selected-date-item,
+    .saved-schedule-item {
+        padding: 10px 12px;
+        font-size: 0.85rem;
+        border-radius: 8px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+
+    .btn-edit-schedule,
+    .btn-delete-schedule {
+        padding: 6px 10px;
+        font-size: 0.75rem;
+        border-radius: 6px;
+        min-height: 35px;
+    }
+
+    .schedule-modal-content {
+        max-width: 95%;
+        padding: 20px;
+        border-radius: 12px;
+        margin: 20px;
+    }
+
+    .schedule-modal-header {
+        font-size: 1.1rem;
+        margin-bottom: 15px;
+        gap: 8px;
+        text-align: center;
+    }
+
+    .schedule-modal-header i {
+        font-size: 1.3rem;
+    }
+
+    .schedule-modal-body {
+        margin-bottom: 15px;
+        font-size: 0.9rem;
+    }
+
+    .schedule-modal-footer {
+        gap: 10px;
+        flex-direction: column;
+    }
+
+    .schedule-modal-footer button {
+        padding: 12px 16px;
+        font-size: 0.9rem;
+        min-height: 45px;
+        border-radius: 8px;
+    }
+
+    .schedule-notification {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        max-width: none;
+        padding: 14px 16px;
+        font-size: 0.9rem;
+        border-radius: 10px;
+    }
+
+    .schedule-notification-title {
+        font-size: 0.95rem;
+    }
+
+        .schedule-notification-message {
+            font-size: 0.85rem;
+        }
+    }
+
+@media screen and (max-width: 425px) {
+    
+    .psychologist-selector-title {
+        margin-bottom: 20px;
+    }
+    
+    .psychologist-selector-header {
+        display: block;
+    }
+    
+}
+
+
+    .calendar-nav button {
+        padding: 5px 6px;
+        font-size: 0.75rem;
+    }
+
+    .calendar-day-name {
+        padding: 6px 1px;
+        font-size: 0.7rem;
+        font-weight: 600;
+    }
+
+    .calendar-day {
+        font-size: 0.75rem;
+        aspect-ratio: 1;
+    }
+
+    .calendar-legend {
+        gap: 8px;
+        margin-top: 8px;
+    }
+
+    .legend-item {
+        font-size: 0.7rem;
+    }
+
+    .legend-box {
+        width: 14px;
+        height: 14px;
+        border-radius: 2px;
+    }
+
+    .selected-dates-container,
+    .saved-schedule-container {
+        padding: 12px;
+        margin-top: 12px;
+    }
+
+    .selected-dates-container h4,
+    .saved-schedule-container h4 {
+        font-size: 0.9rem;
+        margin-bottom: 8px;
+    }
+
+    .selected-dates-list,
+    .saved-schedule-list {
+        gap: 5px;
+        max-height: 100px;
+    }
+
+    .selected-date-item,
+    .saved-schedule-item {
+        padding: 7px 8px;
+        font-size: 0.8rem;
+    }
+
+    .selected-date-item .date-text,
+    .saved-schedule-item-date {
+        font-size: 0.8rem;
+    }
+
+    .selected-date-item .time-text,
+    .saved-schedule-item-time {
+        font-size: 0.7rem;
+    }
+
+    .btn-edit-schedule,
+    .btn-delete-schedule {
+        padding: 3px 6px;
+        font-size: 0.7rem;
+    }
+
+    .schedule-modal-content {
+        padding: 15px;
+        border-radius: 8px;
+    }
+
+    .schedule-modal-header {
+        font-size: 1rem;
+    }
+
+    .schedule-modal-header i {
+        font-size: 1.2rem;
+    }
+
+    .schedule-modal-body {
+        font-size: 0.85rem;
+        margin-bottom: 12px;
+    }
+
+    .schedule-modal-footer button {
+        padding: 7px 10px;
+        font-size: 0.85rem;
+    }
+
+    .schedule-notification {
+        max-width: none;
+        top: 8px;
+        right: 8px;
+        left: 8px;
+        padding: 10px 12px;
+    }
+
+    .schedule-notification-title {
+        font-size: 0.9rem;
+    }
+
+    .schedule-notification-message {
+        font-size: 0.8rem;
+    }
+
+    /* Mobile Small (< 375px) */
+    @media screen and (max-width: 374px) {
+        .schedule-management-container {
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+    .time-slot-selector,
+    .calendar-selector {
+        padding: 10px;
+        border-radius: 6px;
+        font-size: 0.8rem;
+    }
+
+    .time-slot-selector h3,
+    .calendar-selector h3 {
+        font-size: 0.85rem;
+        margin-bottom: 8px;
+    }
+
+    .time-slot-grid {
+        grid-template-columns: repeat(auto-fit, minmax(45px, 1fr));
+        gap: 4px;
+        margin-bottom: 10px;
+    }
+
+    .time-slot-label {
+        padding: 6px 2px;
+        font-size: 0.7rem;
+        min-height: 40px;
+        border-width: 1px;
+        border-radius: 4px;
+    }
+
+    .time-slot-info {
+        font-size: 0.7rem;
+        padding: 5px;
+        margin-bottom: 8px;
+    }
+
+    .btn-apply-times,
+    .btn-clear-times {
+        padding: 8px;
+        font-size: 0.8rem;
+    }
+
+    .calendar-month-year {
+        font-size: 0.9rem;
+    }
+
+    .calendar-nav button {
+        padding: 4px 5px;
+        font-size: 0.7rem;
+    }
+
+    .calendar-grid {
+        gap: 3px;
+    }
+
+    .calendar-day-name {
+        padding: 5px 1px;
+        font-size: 0.65rem;
+    }
+
+    .calendar-day {
+        font-size: 0.7rem;
+        border-width: 1px;
+    }
+
+    .legend-item {
+        font-size: 0.65rem;
+    }
+
+    .legend-box {
+        width: 12px;
+        height: 12px;
+    }
+
+    .selected-dates-container,
+    .saved-schedule-container {
+        padding: 10px;
+        margin-top: 10px;
+    }
+
+    .selected-dates-container h4,
+    .saved-schedule-container h4 {
+        font-size: 0.85rem;
+        margin-bottom: 6px;
+    }
+
+    .selected-dates-list,
+    .saved-schedule-list {
+        max-height: 80px;
+    }
+
+    .selected-date-item,
+    .saved-schedule-item {
+        padding: 6px 7px;
+        font-size: 0.75rem;
+    }
+
+    .btn-edit-schedule,
+    .btn-delete-schedule {
+        padding: 2px 5px;
+        font-size: 0.65rem;
+    }
+
+    .schedule-modal-content {
+        padding: 12px;
+        border-radius: 6px;
+    }
+
+    .schedule-modal-header {
+        font-size: 0.95rem;
+        margin-bottom: 10px;
+    }
+
+    .schedule-modal-header i {
+        font-size: 1.1rem;
+    }
+
+    .schedule-modal-body {
+        font-size: 0.8rem;
+        line-height: 1.4;
+    }
+
+    .schedule-modal-footer button {
+        padding: 6px 8px;
+        font-size: 0.8rem;
+    }
+
+    .schedule-notification {
+        padding: 8px 10px;
+        font-size: 0.8rem;
+    }
+}
+/* ========================================
+   MODAL STYLES
+   ======================================== */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    max-width: 500px;
+    width: 90%;
+    max-height: 80vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #e0e0e0;
+    background: #f5f5f5;
+}
+
+.modal-header h3 {
+    margin: 0;
+    color: var(--color-text);
+    font-size: 1.1rem;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #666;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-close:hover {
+    color: #333;
+}
+
+.modal-body {
+    padding: 20px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+/* ========================================
+   FORM & SELECTOR RESPONSIVE STYLES
+   ======================================== */
+
+/* Psychologist Selector (for Admin) */
+.psychologist-selector-container,
+.form-group select,
+.form-group input {
+    width: 100%;
+    max-width: 100%;
+}
+
+.psychologist-selector-container {
+    margin-bottom: 20px;
+}
+
+.psychologist-selector-container label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-size: 1rem;
+}
+
+.psychologist-selector-container select {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid var(--color-border);
+    border-radius: 6px;
+    font-size: 0.95rem;
+    background-color: white;
+    cursor: pointer;
+    min-height: 40px;
+}
+
+/* Responsive adjustments for select */
+@media screen and (max-width: 1024px) {
+    .psychologist-selector-container select {
+        font-size: 0.9rem;
+        padding: 8px;
+        min-height: 40px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .psychologist-selector-container select {
+        font-size: 0.9rem;
+        padding: 8px;
+        min-height: 44px;
+    }
+}
+
+@media screen and (max-width: 479px) {
+    .psychologist-selector-container select {
+        font-size: 0.85rem;
+        padding: 7px;
+        min-height: 42px;
+    }
+}
+
+@media screen and (max-width: 374px) {
+    .psychologist-selector-container select {
+        font-size: 0.8rem;
+        padding: 6px;
+        min-height: 40px;
+    }
+}
+
+/* Fix for time slot checkboxes - make them functional */

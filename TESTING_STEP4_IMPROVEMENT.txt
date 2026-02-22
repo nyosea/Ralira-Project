@@ -1,0 +1,234 @@
+================================================================================
+TESTING STEP 4 - RESET LINK GENERATION IMPROVEMENT
+================================================================================
+
+Tanggal: $(date)
+Tujuan: Verify bahwa link generation STEP 4 sudah diperbaiki dan bekerja dengan baik
+
+================================================================================
+IMPROVEMENTS YANG SUDAH KAMI LAKUKAN:
+================================================================================
+
+1. SENDMAIL FUNCTION ENHANCEMENT
+   - Added better error handling dengan try-catch
+   - Added email validation (filter_var)
+   - Added better development mode support untuk XAMPP
+   - Added logging untuk debugging email send failures
+   - Added Reply-To header untuk better email handling
+
+2. LINK GENERATION IMPROVEMENTS
+   - Use hardcoded base URL: http://localhost/ralira_project/
+   - Proper URL encoding dengan urlencode()
+   - Better error handling dengan try-catch wrapper
+   - Error logging untuk track failures
+
+3. EMAIL TEMPLATE IMPROVEMENTS
+   - Better HTML formatting
+   - Cleaner design dengan styling
+   - Professional footer dengan Rali Ra branding
+   - Clear instructions untuk user
+
+================================================================================
+TESTING CHECKLIST - STEP 4 RESET LINK GENERATION:
+================================================================================
+
+PREREQUISITE:
+- [ ] XAMPP sudah running
+- [ ] Database sudah ter-setup dengan ralira_db
+- [ ] Punya test account dengan email yang bisa diakses
+
+TEST CASE 1: Register New User with Manual Method
+=====================================================
+Langkah:
+1. Go to: http://localhost/ralira_project/pages/auth/register.php
+2. Register dengan:
+   - Email: test.step4@example.com (atau email yang bisa Anda akses)
+   - Password: testpass123
+   - Select: Klien (Client)
+3. Verify register berhasil
+4. Klik "Masuk Sekarang" atau go to login
+
+Expected Result:
+- Akun terdaftar di database dengan login_method='manual'
+- Dapat redirect ke login page
+
+TEST CASE 2: Forgot Password - Email Input
+=====================================================
+Langkah:
+1. Go to: http://localhost/ralira_project/pages/auth/forgot-password.php
+2. Masukkan email: test.step4@example.com
+3. Klik "Kirim Link Reset"
+
+Expected Result:
+- Terima success message: "Email reset password telah dikirim ke: test.step4@example.com..."
+- Atau alternative message jika email gagal (XAMPP development): "Token reset telah dibuat. Silakan hubungi admin..."
+
+TEST CASE 3: Check Email / Reset Link
+=====================================================
+Langkah:
+Option A - Jika Email Berhasil Terkirim:
+  1. Buka email Anda di inbox untuk test.step4@example.com
+  2. Lihat email dengan subject: "Reset Password - Biro Psikologi Rali Ra"
+  3. Klik link reset password: "🔐 Reset Password"
+  4. Verify page loads dengan form untuk password baru
+
+Option B - Jika Email Gagal (XAMPP): 
+  1. Buka browser developer console (F12)
+  2. Go ke Network tab
+  3. Perhatikan request ke forgot-password.php
+  4. Lihat di server logs apakah ada error
+  5. Cek file: c:\xampp\php\logs\php_error_log
+
+Expected Result:
+- Reset link bekerja dan page load tanpa error
+- Form password baru visible
+- Token sudah tersimpan di database
+
+TEST CASE 4: Reset Password Form
+=====================================================
+Langkah:
+1. Di halaman reset password, masukkan:
+   - Password Baru: newpass123
+   - Konfirmasi Password: newpass123
+2. Klik "Reset Password"
+
+Expected Result:
+- Success message: "Password berhasil direset! Silakan masuk dengan password baru Anda."
+- Form hilang, tampil tombol "Masuk Sekarang"
+
+TEST CASE 5: Login dengan Password Baru
+=====================================================
+Langkah:
+1. Klik tombol "Masuk Sekarang" dari halaman success
+2. Masukkan:
+   - Email: test.step4@example.com
+   - Password: newpass123
+3. Klik "Masuk"
+
+Expected Result:
+- Login berhasil
+- Redirect ke dashboard (client/psychologist sesuai role)
+- Session terciptakan dengan user_id dan role
+
+================================================================================
+DEBUGGING STEP 4 - Jika Ada Masalah:
+================================================================================
+
+ISSUE: Email tidak terkirim tapi tidak ada error
+SOLUSI:
+- Ini normal untuk XAMPP development (mail() tidak dikonfigurasi)
+- System akan menunjukkan: "Token reset telah dibuat. Silakan hubungi admin..."
+- Untuk production, perlu setup SMTP atau PHPMailer
+
+ISSUE: "Link reset password tidak valid atau sudah kadaluarsa"
+SOLUSI:
+- Reset token hanya berlaku 1 jam
+- Cek database apakah reset_token dan reset_token_expires ter-update
+- Query untuk check:
+  SELECT user_id, email, reset_token, reset_token_expires FROM users WHERE email='test.step4@example.com';
+- Pastikan reset_token_expires belum lewat
+
+ISSUE: "Unknown column 'reset_token'"
+SOLUSI:
+- Jalankan database migration script:
+  http://localhost/ralira_project/run_migration.php
+- Atau manual:
+  ALTER TABLE users ADD COLUMN reset_token VARCHAR(255) NULL;
+  ALTER TABLE users ADD COLUMN reset_token_expires DATETIME NULL;
+  ALTER TABLE users ADD INDEX idx_reset_token (reset_token);
+
+ISSUE: Token tidak di-generate
+SOLUSI:
+- Cek PHP error log di: c:\xampp\php\logs\php_error_log
+- Verify Random bytes function tersedia: 
+  Open pages/auth/forgot-password.php
+  Lihat apakah bin2hex(random_bytes(32)) berhasil
+- PHP 7.0+ sudah support random_bytes()
+
+================================================================================
+DATABASE CHECKS - Untuk Verify Data Tersimpan:
+================================================================================
+
+CHECK 1: User Terdaftar dengan Login Method
+Query:
+  SELECT user_id, email, login_method FROM users WHERE email='test.step4@example.com';
+
+Expected:
+  | user_id | email                    | login_method |
+  |---------|--------------------------|--------------|
+  | XX      | test.step4@example.com   | manual       |
+
+CHECK 2: Reset Token Tersimpan
+Query:
+  SELECT user_id, email, reset_token, reset_token_expires FROM users WHERE email='test.step4@example.com';
+
+Expected:
+  | user_id | email                    | reset_token                          | reset_token_expires         |
+  |---------|--------------------------|--------------------------------------|-----------------------------|
+  | XX      | test.step4@example.com   | <64 hex characters>                  | <datetime dalam 1 jam>      |
+
+CHECK 3: Password Ter-update Setelah Reset
+Query:
+  SELECT user_id, email, password FROM users WHERE email='test.step4@example.com';
+
+Expected:
+  Password field berisi bcrypt hash yang dimulai dengan "$2y$..."
+  reset_token dan reset_token_expires harus NULL (sudah di-cleanup)
+
+================================================================================
+ERROR LOG LOCATIONS:
+================================================================================
+
+PHP Error Log:
+  c:\xampp\php\logs\php_error_log
+
+MySQL Log (optional):
+  c:\xampp\mysql\data\<hostname>.err
+
+Apache Error Log:
+  c:\xampp\apache\logs\error.log
+
+Untuk debug email sending:
+- Cek messages di error_log dari sendEmail() function
+- Add debug statement di forgot-password.php untuk log email content
+
+================================================================================
+NEXT STEPS SETELAH TESTING:
+================================================================================
+
+1. Jika STEP 4 sudah bekerja dengan baik:
+   - Test STEP 5 (password reset form)
+   - Test login dengan password baru
+   - Mark STEP 4 sebagai VERIFIED ✅
+
+2. Jika ada issues:
+   - Provide error message dari browser / error log
+   - Check database apakah token tersimpan
+   - Verify sendEmail() function berjalan
+
+3. Untuk production:
+   - Setup PHPMailer atau SMTP configuration
+   - Update BASE_URL ke production domain
+   - Add email template ke file terpisah
+   - Setup email verification sebelum kirim reset link
+
+================================================================================
+QUICK REFERENCE:
+================================================================================
+
+Reset Link Format (STEP 4):
+  http://localhost/ralira_project/pages/auth/reset-password.php?token=<64-hex-chars>
+
+Token Generation:
+  bin2hex(random_bytes(32))  → 64 character hexadecimal string
+
+Token Expiry:
+  1 hour dari waktu generation
+  Query check: reset_token_expires > NOW()
+
+Email Function:
+  sendEmail($to, $subject, $message)
+  Returns: true (success) / false (failed)
+  Logs to: error_log() untuk debugging
+
+================================================================================

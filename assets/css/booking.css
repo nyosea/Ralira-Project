@@ -1,0 +1,270 @@
+/**
+ * Filename: assets/css/booking.css
+ * Description: Styles khusus untuk halaman Booking Konsultasi Klien
+ */
+
+/* Upload Area Styles */
+.upload-area {
+    border: 2px dashed rgba(0,0,0,0.2);
+    border-radius: 8px;
+    padding: 30px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.3s;
+    background: rgba(255,255,255,0.3);
+}
+
+.upload-area:hover {
+    border-color: var(--color-primary);
+    background: rgba(251, 186, 0, 0.1);
+}
+
+.upload-area p {
+    margin: 0;
+    color: var(--color-text-light);
+}
+
+.file-selected {
+    color: var(--color-primary);
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+/* RH Button Styles */
+.rh-btn {
+    padding: 12px 20px;
+    background: var(--color-primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: 0.3s;
+}
+
+.rh-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+.rh-filled {
+    background: #4CAF50;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background-color: white;
+    margin: 5% auto;
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 700px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #000;
+}
+
+/* Form Styles */
+textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.char-count {
+    font-size: 0.8rem;
+    color: #666;
+    text-align: right;
+    margin-top: 5px;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN - BOOKING PAGE
+   ======================================== */
+
+/* Tablet (768px - 1024px) */
+@media screen and (max-width: 1024px) {
+    .upload-area {
+        padding: 20px;
+    }
+
+    .modal-content {
+        max-width: 90%;
+        margin: 10% auto;
+        padding: 20px;
+    }
+
+    .rh-btn {
+        width: 100%;
+        padding: 10px 16px;
+    }
+}
+
+/* Mobile Large (480px - 767px) */
+@media screen and (max-width: 767px) {
+    .upload-area {
+        padding: 15px;
+        border-radius: 6px;
+    }
+
+    .upload-area p {
+        font-size: 0.9rem;
+    }
+
+    .modal-content {
+        max-width: 95%;
+        margin: 20% auto;
+        padding: 15px;
+        max-height: 80vh;
+    }
+
+    .close {
+        font-size: 24px;
+    }
+
+    .rh-btn {
+        width: 100%;
+        padding: 10px 12px;
+        font-size: 0.9rem;
+        min-height: 44px;
+    }
+
+    textarea {
+        min-height: 80px;
+        padding: 8px;
+        font-size: 16px;
+    }
+
+    .char-count {
+        font-size: 0.75rem;
+    }
+}
+
+/* Mobile Medium (375px - 479px) */
+@media screen and (max-width: 479px) {
+    .upload-area {
+        padding: 12px;
+        margin: 10px 0;
+    }
+
+    .upload-area p {
+        font-size: 0.85rem;
+    }
+
+    .file-selected {
+        font-size: 0.8rem;
+        margin-top: 8px;
+    }
+
+    .modal-content {
+        max-width: 98%;
+        margin: 30% auto;
+        padding: 12px;
+        max-height: 75vh;
+    }
+
+    .close {
+        font-size: 20px;
+    }
+
+    .rh-btn {
+        width: 100%;
+        padding: 8px 10px;
+        font-size: 0.85rem;
+        min-height: 42px;
+        border-radius: 6px;
+    }
+
+    textarea {
+        min-height: 70px;
+        padding: 6px;
+        font-size: 16px;
+        border-radius: 4px;
+    }
+
+    .char-count {
+        font-size: 0.7rem;
+        margin-top: 3px;
+    }
+}
+
+/* Mobile Small (< 375px) */
+@media screen and (max-width: 374px) {
+    .upload-area {
+        padding: 10px;
+        border-width: 1px;
+        border-radius: 4px;
+    }
+
+    .upload-area p {
+        font-size: 0.8rem;
+        margin: 5px 0;
+    }
+
+    .file-selected {
+        font-size: 0.75rem;
+        margin-top: 5px;
+    }
+
+    .modal-content {
+        max-width: 99%;
+        margin: 40% auto;
+        padding: 10px;
+        max-height: 70vh;
+    }
+
+    .close {
+        font-size: 18px;
+    }
+
+    .rh-btn {
+        width: 100%;
+        padding: 7px 8px;
+        font-size: 0.8rem;
+        min-height: 40px;
+        border-radius: 4px;
+    }
+
+    textarea {
+        min-height: 60px;
+        padding: 5px;
+        font-size: 16px;
+    }
+
+    .char-count {
+        font-size: 0.65rem;
+    }
+}
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,272 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║                                                                            ║
+║                    QUICK START - TEST STEP 4 SEKARANG                      ║
+║                                                                            ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+⏱️ WAKTU TESTING: ~10 menit untuk 1 complete cycle
+
+📋 CHECKLIST PRE-TEST:
+═════════════════════════════════════════════════════════════════════════════
+
+Sebelum mulai, pastikan:
+☑ XAMPP running (Apache + MySQL)
+☑ Database ralira_db sudah ter-import
+☑ Browser dapat akses http://localhost/ralira_project/
+☑ Browser dengan developer tools (F12) atau text editor untuk lihat error log
+
+
+🚀 TESTING SCENARIO 1: REGISTER & FORGOT PASSWORD (3 MENIT)
+═════════════════════════════════════════════════════════════════════════════
+
+Langkah 1: Register Akun Baru
+─────────────────────────────
+1. Go to: http://localhost/ralira_project/pages/auth/register.php
+2. Isikan form:
+   - Nama: TestUser Step4
+   - Email: test.step4.XXXX@example.com  ← ganti XXXX dengan random number
+   - Password: testpass123
+   - Ulangi Password: testpass123
+   - Role: Klien (Client)
+3. Klik "Daftar Sekarang"
+
+Expected:
+   ✓ Registrasi berhasil
+   ✓ Redirect ke login page
+   ✓ Melihat pesan sukses
+
+
+Langkah 2: Go to Forgot Password
+─────────────────────────────────
+1. Di login page, klik "Lupa Password?"
+2. Atau direct: http://localhost/ralira_project/pages/auth/forgot-password.php
+3. Masukkan email: test.step4.XXXX@example.com (email dari step 1)
+4. Klik "Kirim Link Reset"
+
+Expected:
+   ✓ Lihat success message: "Jika email terdaftar, kami akan mengirim..."
+   ATAU
+   ✓ Fallback message (untuk XAMPP): "Token reset telah dibuat..."
+
+
+Langkah 3: Check Database Token
+───────────────────────────────
+Buka phpMyAdmin atau command line MySQL:
+
+Query:
+  SELECT user_id, email, reset_token, reset_token_expires 
+  FROM users 
+  WHERE email='test.step4.XXXX@example.com' 
+  LIMIT 1;
+
+Expected:
+   ✓ Lihat reset_token (64 character hex string)
+   ✓ reset_token_expires = timestamp dalam 1 jam
+
+
+🔧 TESTING SCENARIO 2: GET RESET LINK & ACCESS (5 MENIT)
+═════════════════════════════════════════════════════════════════════════════
+
+Option A: Jika Email Terkirim (Email Configured)
+──────────────────────────────────────────────────
+
+Langkah 1: Cek Email
+   1. Buka email inbox Anda
+   2. Cari email dengan subject: "Reset Password - Biro Psikologi Rali Ra"
+   3. Lihat reset link dalam email
+
+Langkah 2: Click Reset Link
+   1. Klik tombol "🔐 Reset Password" dalam email
+   2. Atau copy-paste link dari email
+
+Expected:
+   ✓ Load halaman: pages/auth/reset-password.php?token=...
+   ✓ Form "Reset Password" tampil
+   ✓ Terlihat email yang terdaftar
+
+
+Option B: Jika Email Tidak Terkirim (XAMPP Development)
+────────────────────────────────────────────────────────
+
+Manual: Construct Reset Link dari Database Token
+
+Langkah 1: Ambil Token dari Database
+   Query MySQL:
+   SELECT reset_token FROM users 
+   WHERE email='test.step4.XXXX@example.com' 
+   LIMIT 1;
+
+   Copy token hasil query (64 character hex string)
+
+Langkah 2: Manually Construct & Access Reset Link
+   URL Format:
+   http://localhost/ralira_project/pages/auth/reset-password.php?token=TOKEN_HERE
+
+   Example:
+   http://localhost/ralira_project/pages/auth/reset-password.php?token=a1b2c3d4e5f6g7h8...
+
+   Paste di browser address bar
+
+Langkah 3: Access Reset Page
+   1. Press Enter
+   2. Verifikasi page load dengan form
+
+Expected:
+   ✓ Reset password form tampil
+   ✓ Tidak ada error message
+   ✓ Email confirmation visible di form
+
+
+🔄 TESTING SCENARIO 3: RESET PASSWORD (2 MENIT)
+═════════════════════════════════════════════════════════════════════════════
+
+Langkah 1: Input Password Baru
+───────────────────────────────
+1. Di halaman reset password form
+2. Masukkan:
+   - Password Baru: newpass123
+   - Konfirmasi Password: newpass123
+3. Klik "Reset Password"
+
+Expected:
+   ✓ Success message: "Password berhasil direset! Silakan masuk dengan..."
+   ✓ Form hilang
+   ✓ Tombol "Masuk Sekarang" visible
+
+
+Langkah 2: Verify Password di Database
+───────────────────────────────────────
+Query MySQL:
+  SELECT email, password, reset_token, reset_token_expires 
+  FROM users 
+  WHERE email='test.step4.XXXX@example.com' 
+  LIMIT 1;
+
+Expected:
+   ✓ password = bcrypt hash (starts with $2y$)
+   ✓ reset_token = NULL (sudah di-cleanup!)
+   ✓ reset_token_expires = NULL
+
+
+Langkah 3: Login dengan Password Baru
+──────────────────────────────────────
+1. Klik tombol "Masuk Sekarang" dari reset success page
+   Atau: http://localhost/ralira_project/pages/auth/login.php
+2. Masukkan:
+   - Email: test.step4.XXXX@example.com
+   - Password: newpass123
+3. Klik "Masuk"
+
+Expected:
+   ✓ Login berhasil ✅
+   ✓ Redirect ke client dashboard
+   ✓ Session terciptakan dengan user_id dan name
+
+
+═════════════════════════════════════════════════════════════════════════════
+📊 RESULT SUMMARY SETELAH TESTING:
+═════════════════════════════════════════════════════════════════════════════
+
+Jika semua langkah berhasil:
+   ✅ STEP 4 IMPROVEMENT VERIFIED WORKING!
+   ✅ Reset link generation tidak "stuck" lagi
+   ✅ Email sending / fallback bekerja dengan baik
+   ✅ Token validation bekerja
+   ✅ Password reset bekerja
+   ✅ Login dengan password baru bekerja
+
+Complete Flow Status:
+   ✅ Register & Create Account
+   ✅ Forget Password Form
+   ✅ Token Generation & Storage
+   ✅ Link Generation & Email
+   ✅ Token Validation
+   ✅ Password Reset Form
+   ✅ Password Update in Database
+   ✅ Login dengan Password Baru
+
+
+═════════════════════════════════════════════════════════════════════════════
+⚠️ TROUBLESHOOTING JIKA ADA ERROR:
+═════════════════════════════════════════════════════════════════════════════
+
+ISSUE: "Link reset password tidak valid atau sudah kadaluarsa"
+───────────────────────────────────────────────────────────────
+Cause: Token sudah expired atau tidak ada di database
+Solution:
+  1. Cek reset_token_expires di database
+  2. Pastikan masih dalam 1 jam
+  3. Generate token baru dengan ulangi forgot password
+
+
+ISSUE: Email tidak received (tapi juga tidak ada error)
+──────────────────────────────────────────────────────
+Cause: Normal untuk XAMPP development tanpa mail configuration
+Solution:
+  1. Gunakan Option B: Manual construct reset link dari database
+  2. Untuk production, setup SMTP atau PHPMailer
+  3. File bantuan: STEP4_IMPROVEMENT_SUMMARY.txt
+
+
+ISSUE: "Unknown column 'reset_token'"
+─────────────────────────────────────
+Cause: Database belum ter-update dengan kolom baru
+Solution:
+  1. Run migration script: http://localhost/ralira_project/run_migration.php
+  2. Atau manual SQL:
+     ALTER TABLE users ADD COLUMN reset_token VARCHAR(255) NULL;
+     ALTER TABLE users ADD COLUMN reset_token_expires DATETIME NULL;
+     CREATE INDEX idx_reset_token ON users(reset_token);
+
+
+ISSUE: Form tidak muncul / blank page
+──────────────────────────────────────
+Cause: PHP error atau token validation gagal
+Solution:
+  1. Check error log: c:\xampp\php\logs\php_error_log
+  2. Check browser F12 → Console untuk JavaScript error
+  3. Verify token ada di database sebelum access reset link
+
+
+═════════════════════════════════════════════════════════════════════════════
+📝 REPORTING RESULTS:
+═════════════════════════════════════════════════════════════════════════════
+
+Setelah testing, silakan report:
+
+✅ Jika BERHASIL:
+  "Testing STEP 4 BERHASIL! Semua langkah berjalan lancar.
+   Flow register → forgot password → reset → login dengan password baru ✅"
+
+❌ Jika GAGAL:
+  "Testing STEP 4 ada error di [step mana]:
+   - Error message: [exact message]
+   - Browser console error: [if any]
+   - Database token: [exists / not exists]
+   - PHP error log: [error message]"
+
+
+═════════════════════════════════════════════════════════════════════════════
+🎯 NEXT ACTIONS:
+═════════════════════════════════════════════════════════════════════════════
+
+1. Test dan verify STEP 4 dengan checklist di atas ✓
+
+2. Jika berhasil, consider untuk:
+   - Run full migration: http://localhost/ralira_project/run_migration.php
+   - Test dengan Google OAuth user (untuk verify login_method smart flow)
+   - Test dengan psychologist user role
+
+3. Dokumentasi lengkap untuk reference:
+   - README_PASSWORD_RESET.txt → Overview
+   - TESTING_PASSWORD_RESET.txt → Full testing guide
+   - STEP4_IMPROVEMENT_SUMMARY.txt → Technical details
+   - TESTING_STEP4_IMPROVEMENT.txt → Detailed test cases
+
+
+═════════════════════════════════════════════════════════════════════════════
+
+Good luck dengan testing! 🚀
+Report hasilnya dan kami siap bantu jika ada masalah!
+
+═════════════════════════════════════════════════════════════════════════════

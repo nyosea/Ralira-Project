@@ -1,0 +1,1 @@
+<?php session_start(); $_SESSION["user_id"] = 28; $_SESSION["role"] = "client"; ?>
