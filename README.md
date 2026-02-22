@@ -6,34 +6,18 @@ The platform focuses on improving service efficiency, reducing manual administra
 
 ✨ Main Features
 
-Online client registration & life history (RH) form
-
-Consultation scheduling management
-
-Psychologist profile information
-
-Psychological test result upload & secure access (PDF)
-
-Automated WhatsApp notifications
-
-Live chat & chatbot support
-
-Educational content management
-
-Commitment payment management
+- Online client registration & life history (RH) form
+- Consultation scheduling management
+- Psychologist profile information
+- Psychological test result upload & secure access (PDF)
+- Educational content management
+- Commitment payment management
 
 🛠️ Technology Stack
-
-Web-based application
-
-Frontend: HTML, CSS, JavaScript (Bootstrap)
-
-Backend: PHP
-
-Database: MySQL
-
-Integration: WhatsApp API & Cloud Storage
+- Web-based application
+- Frontend: HTML, CSS, JavaScript (Bootstrap)
+- Backend: PHP
+- Database: MySQL
 
 🎯 Purpose
-
 This project was developed as part of a system analysis and design implementation to digitize administrative and consultation processes in a psychology bureau environment.
